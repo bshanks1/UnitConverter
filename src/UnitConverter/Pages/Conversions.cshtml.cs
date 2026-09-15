@@ -6,78 +6,79 @@ namespace UnitConverter.Pages;
 
 public class ConversionsModel : PageModel
 {
-    [BindProperty(SupportsGet = true)]
-    public string Input { get; set; } = String.Empty;
-    public string Output { get; set; } = String.Empty;
-
-    [BindProperty(SupportsGet = true)]
-    public string ConversionType { get; set; } = String.Empty;
-    private double inputDouble = 0.0;
+    [BindProperty(SupportsGet = true)] public string? Input { get; set; } = "3.1415";
+    public string Output { get; set; } = "5.055754176000001";
+    [BindProperty(SupportsGet = true)] public string? ConversionType { get; set; } = "Miles to Kilometers";
 
     public void OnGet()
     {
         ViewData.Add("ConversionType", ConversionType);
         ViewData["Title"] = "Conversions";
+        double inputDouble = 0.0;
 
         try
         {
             inputDouble = Convert.ToDouble(Input);
         }
-
-        catch (FormatException)
+        catch (FormatException e)
         {
-            ViewData["ErrorMessage"] = "Input Needs to be a valid number.";
+            ViewData["ErrorMessage"] = "Invalid input, please give a valid number";
         }
-
         double outputDouble = 0.0;
 
         switch (ConversionType)
         {
             case "MilesToKilometers":
-                UnitOf.Length unitMileKilo= new UnitOf.Length().FromMiles(inputDouble);
-                outputDouble = unitMileKilo.ToKilometers();
+                UnitOf.Length unitMK = new UnitOf.Length().FromMiles(inputDouble);
+                outputDouble = unitMK.ToKilometers();
+                break;
+
+            case "Miles to Kilometers":
+                UnitOf.Length unitMK2 = new UnitOf.Length().FromMiles(inputDouble);
+                outputDouble = unitMK2.ToKilometers();
                 break;
 
             case "KilometersToMiles":
-                UnitOf.Length unitKiloMile = new UnitOf.Length().FromKilometers(inputDouble);
-                outputDouble = unitKiloMile.ToMiles();
+                UnitOf.Length unitKM = new UnitOf.Length().FromKilometers(inputDouble);
+                outputDouble = unitKM.ToMiles();
                 break;
 
             case "FahrenheitToCelsius":
-                UnitOf.Temperature unitFheitCels = new UnitOf.Temperature().FromFahrenheit(inputDouble);
-                outputDouble = unitFheitCels.ToCelsius();
+                UnitOf.Temperature unitFC = new UnitOf.Temperature().FromFahrenheit(inputDouble);
+                outputDouble = unitFC.ToCelsius();
                 break;
 
             case "CelsiusToFahrenheit":
-                UnitOf.Temperature unitCelsFheit = new UnitOf.Temperature().FromCelsius(inputDouble);
-                outputDouble = unitCelsFheit.ToFahrenheit();
+                UnitOf.Temperature unitCF = new UnitOf.Temperature().FromCelsius(inputDouble);
+                outputDouble = unitCF.ToFahrenheit();
                 break;
 
             case "PoundsToKilograms":
-                UnitOf.Mass unitPoundKilo = new UnitOf.Mass().FromPounds(inputDouble);
-                outputDouble = unitPoundKilo.ToKilograms();
+                UnitOf.Mass unitPK = new UnitOf.Mass().FromPounds(inputDouble);
+                outputDouble = unitPK.ToKilograms();
                 break;
 
             case "KilogramsToPounds":
-                UnitOf.Mass unitKiloPound = new UnitOf.Mass().FromKilograms(inputDouble);
-                outputDouble = unitKiloPound.ToPounds();
+                UnitOf.Mass unitKP = new UnitOf.Mass().FromKilograms(inputDouble);
+                outputDouble = unitKP.ToPounds();
                 break;
 
-            case "LitersToPints":
-                UnitOf.Volume unitLiterPint = new UnitOf.Volume().FromLiters(inputDouble);
-                outputDouble = unitLiterPint.ToPintsUS();
+            case "MegaBytesToGigabytes":
+                UnitOf.DataStorage unitMG = new UnitOf.DataStorage().FromMegabytes(inputDouble);
+                outputDouble = unitMG.ToGigabytes();
                 break;
 
-            case "PintsToLiters":
-                UnitOf.Volume unitPintLiter = new UnitOf.Volume().FromPintsUS(inputDouble);
-                outputDouble = unitPintLiter.ToLiters();
+            case "GigabytesToMegaBytes":
+                UnitOf.DataStorage unitGM = new UnitOf.DataStorage().FromGigabytes(inputDouble);
+                outputDouble = unitGM.ToMegabytes();
                 break;
 
             default:
-                ViewData["ErrorMessage"] = "Conversion type not supported, please choose a supported conversion.";
+                ViewData["ErrorMessage"] = "Conversion type not supported";
                 break;
+
         }
 
-        String outputString = outputDouble.ToString();
+        Output = Convert.ToString(outputDouble);
     }
 }
