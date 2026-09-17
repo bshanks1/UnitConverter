@@ -6,19 +6,19 @@ namespace UnitConverter.Pages;
 
 public class ConversionsModel : PageModel
 {
-    [BindProperty(SupportsGet = true)] public string? Input { get; set; } = "3.1415";
-    public string Output { get; set; } = "5.055754176000001";
-    [BindProperty(SupportsGet = true)] public string? ConversionType { get; set; } = "Miles to Kilometers";
+    [BindProperty(SupportsGet = true)]
+    public ConversionModel conversionModel { get; set; } = new ConversionModel();
+
 
     public void OnGet()
     {
-        ViewData.Add("ConversionType", ConversionType);
+        ViewData.Add("ConversionType", conversionModel.ConversionType);
         ViewData["Title"] = "Conversions";
         double inputDouble = 0.0;
 
         try
         {
-            inputDouble = Convert.ToDouble(Input);
+            inputDouble = Convert.ToDouble(conversionModel.Input);
         }
         catch (FormatException e)
         {
@@ -26,7 +26,7 @@ public class ConversionsModel : PageModel
         }
         double outputDouble = 0.0;
 
-        switch (ConversionType)
+        switch (conversionModel.ConversionType)
         {
             case "MilesToKilometers":
                 UnitOf.Length unitMK = new UnitOf.Length().FromMiles(inputDouble);
@@ -79,6 +79,6 @@ public class ConversionsModel : PageModel
 
         }
 
-        Output = Convert.ToString(outputDouble);
+        conversionModel.Output = Convert.ToString(outputDouble);
     }
 }
