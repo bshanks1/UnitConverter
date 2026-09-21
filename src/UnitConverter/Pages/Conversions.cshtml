@@ -1,4 +1,4 @@
-﻿@page "{ConversionType?}/{Input?}"
+﻿@page "{Conversion.ConversionType?}/{Conversion.Input?}"
 @model UnitConverter.Pages.ConversionsModel
 
 <!DOCTYPE html>
@@ -12,6 +12,7 @@
 @if (ViewData["ErrorMessage"] != null)
 {
     <p>@ViewData["Error Message"]</p>
+    <a href="/">Return to the conversion form</a>
 }
 
 else
@@ -19,8 +20,8 @@ else
     <div id="Conversion">
         <h1>@ViewData["ConversionType"]</h1>
 
-        <p>Input: @Model.conversionModel.Input</p>
-        <p>Output: @Model.conversionModel.Output</p>
+        <p>Input: @Model.Conversion.Input</p>
+        <p>Output: @Model.Conversion.Output</p>
     </div>
 }
 </body>
