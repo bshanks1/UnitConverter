@@ -12,7 +12,6 @@
 @if (ViewData["ErrorMessage"] != null)
 {
     <p>@ViewData["Error Message"]</p>
-    <a href="/">Return to the conversion form</a>
 }
 
 else
@@ -24,5 +23,6 @@ else
         <p>Output: @Model.Conversion.Output</p>
     </div>
 }
+    <a href="/">Return to the conversion form</a>
 </body>
 </html>
