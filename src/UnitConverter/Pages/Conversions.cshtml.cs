@@ -43,6 +43,7 @@ public class ConversionsModel : PageModel
         {
             ViewData["ErrorMessage"] = "Invalid input, please give a valid number";
         }
+
         double outputDouble = 0.0;
 
         switch (Conversion.ConversionType)
@@ -53,7 +54,7 @@ public class ConversionsModel : PageModel
                 break;
 
             case ConversionTypes.MilesToKilometersForTest:
-                UnitOf.Length unitMKT= new UnitOf.Length().FromMiles(inputDouble);
+                UnitOf.Length unitMKT = new UnitOf.Length().FromMiles(inputDouble);
                 outputDouble = unitMKT.ToKilometers();
                 break;
 
@@ -101,5 +102,6 @@ public class ConversionsModel : PageModel
         Conversion.Output = Convert.ToString(outputDouble);
         Output = Convert.ToString(outputDouble);
     }
-
+    
 }
+
