@@ -1,11 +1,21 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Linq.Expressions;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using UnitConverter.Models;
+using UnitConverter.Services;
 
 namespace UnitConverter.Pages;
 
 public class QuickConversions : PageModel
 {
+    public string Output { get; set; }
+    private readonly IConversionService conversionService;
+
+    public QuickConversions(IConversionService conversionService)
+    {
+        this.conversionService = conversionService;
+    }
     public void OnGetNormal()
     {
 
@@ -13,47 +23,66 @@ public class QuickConversions : PageModel
 
     public IActionResult OnGetMilesToKilometers(string input)
     {
-        return RedirectToConversion(ConversionTypes.MilesToKilometers, input);
+        PerformConversion(input, ConversionTypes.MilesToKilometers);
+        return Page();
     }
 
     public IActionResult OnGetKilometersToMiles(string input)
     {
-        return RedirectToConversion(ConversionTypes.KilometersToMiles, input);
+        PerformConversion(input, ConversionTypes.KilometersToMiles);
+        return Page();
     }
 
     public IActionResult OnGetFahrenheitToCelsius(string input)
     {
-        return RedirectToConversion(ConversionTypes.FahrenheitToCelsius, input);
+        PerformConversion(input, ConversionTypes.FahrenheitToCelsius);
+        return Page();
     }
 
     public IActionResult OnGetCelsiusToFahrenheit(string input)
     {
-        return RedirectToConversion(ConversionTypes.CelsiusToFahrenheit, input);
+        PerformConversion(input, ConversionTypes.CelsiusToFahrenheit);
+        return Page();
     }
 
     public IActionResult OnGetPoundsToKilograms(string input)
     {
-        return RedirectToConversion(ConversionTypes.PoundsToKilograms, input);
+        PerformConversion(input, ConversionTypes.PoundsToKilograms);
+        return Page();
     }
 
     public IActionResult OnGetKilogramsToPounds(string input)
     {
-        return RedirectToConversion(ConversionTypes.KilogramsToPounds, input);
+        PerformConversion(input, ConversionTypes.KilogramsToPounds);
+        return Page();
     }
 
     public IActionResult OnGetMegabytesToGigabytes(string input)
     {
-        return RedirectToConversion(ConversionTypes.MegabytesToGigabytes, input);
+        PerformConversion(input, ConversionTypes.MegabytesToGigabytes);
+        return Page();
     }
 
     public IActionResult OnGetGigabytesToMegabytes(string input)
     {
-        return RedirectToConversion(ConversionTypes.GigabytesToMegabytes, input);
+        PerformConversion(input, ConversionTypes.GigabytesToMegabytes);
+        return Page();
     }
 
-    private IActionResult RedirectToConversion(string conversionType, string input)
+    private void PerformConversion(string input, string conversionType)
     {
-        return Redirect($"/Conversions/{conversionType}/{input}");
+        decimal inputDecimal = 0;
+
+        try
+        {
+            inputDecimal = Convert.ToDecimal(input);
+            Output = conversionService.Convert(inputDecimal, conversionType).ToString();
+
+        }
+        catch (Exception e)
+        {
+            ViewData["Error Message"] = "Invalid input, please try again with a valid number";
+        }
     }
 
     public IEnumerable<SelectListItem> PoundOptions =>

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using UnitConverter.Models;
 
 namespace UnitConverter.Pages;
 
@@ -33,6 +34,7 @@ public class ConversionsModel : PageModel
             Input = "3.1415";
         }
 
+
         ViewData.Add("ConversionType", Conversion.ConversionType);
 
         try
@@ -57,6 +59,7 @@ public class ConversionsModel : PageModel
                 UnitOf.Length unitMKT = new UnitOf.Length().FromMiles(inputDouble);
                 outputDouble = unitMKT.ToKilometers();
                 break;
+
 
             case ConversionTypes.KilometersToMiles:
                 UnitOf.Length unitKM = new UnitOf.Length().FromKilometers(inputDouble);
@@ -102,6 +105,6 @@ public class ConversionsModel : PageModel
         Conversion.Output = Convert.ToString(outputDouble);
         Output = Convert.ToString(outputDouble);
     }
-    
+
 }
 

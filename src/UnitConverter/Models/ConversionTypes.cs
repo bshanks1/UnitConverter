@@ -1,4 +1,4 @@
-﻿namespace UnitConverter.Pages;
+﻿namespace UnitConverter.Models;
 
 public static class ConversionTypes
 {
@@ -15,15 +15,14 @@ public static class ConversionTypes
     public static readonly IReadOnlyDictionary<string, string> All =
         new Dictionary<string, string>
         {
-            [MilesToKilometers] = "Miles to Kilometers",
-            [MilesToKilometersForTest] = "Miles to Kilometers",
-            [KilometersToMiles] = "Kilometers to Miles",
-            [FahrenheitToCelsius] = "Fahrenheit to Celsius",
-            [CelsiusToFahrenheit] = "Celsius to Fahrenheit",
-            [PoundsToKilograms] = "Pounds to Kilograms",
-            [KilogramsToPounds] = "Kilograms to Pounds",
-            [MegabytesToGigabytes] = "Megabytes to Gigabytes",
-            [GigabytesToMegabytes] = "Gigabytes to Megabytes"
+            [MilesToKilometers] = "Miles To Kilometers",
+            [KilometersToMiles] = "Kilometers To Miles",
+            [FahrenheitToCelsius] = "Fahrenheit To Celsius",
+            [CelsiusToFahrenheit] = "Celsius To Fahrenheit",
+            [PoundsToKilograms] = "Pounds To Kilograms",
+            [KilogramsToPounds] = "Kilograms To Pounds",
+            [MegabytesToGigabytes] = "Megabytes To Gigabytes",
+            [GigabytesToMegabytes] = "Gigabytes To Megabytes"
         };
 
 }

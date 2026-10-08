@@ -1,4 +1,5 @@
 ﻿@page "{handler?}"
+@using UnitConverter.Models
 @model UnitConverter.Pages.QuickConversions
 
 <!DOCTYPE html>
@@ -8,6 +9,18 @@
     <title>Quick Conversions</title>
 </head>
 <body>
+
+<div id="Output">
+    @if (ViewData["Error Message"] != null)
+    {
+        <div role="alert">@ViewData["Error Message"]</div>
+    }
+
+    else
+    {
+        <p>@Model.Output</p>
+    }
+</div>
 <div id="MilesToKilometersForm">
     <form method="get" asp-page-handler="@ConversionTypes.MilesToKilometers">
         <label class="form-label" for="miles">Miles</label>
@@ -33,7 +46,7 @@
 </div>
 
 <div id="CelsiusToFahrenheitForm">
-    <form method="get" asp-page-handler="@ConversionTypes.CelsiusToFahrenheit" >
+    <form method="get" asp-page-handler="@ConversionTypes.CelsiusToFahrenheit">
         <label class="form-label" for="celsius">Celsius (-100 to 100)</label>
         <input id="celsius" name="input" type="range" min="-100" max="100" class="form-control"/>
         <button type="submit" class="btn btn-primary">Convert</button>
