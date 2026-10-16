@@ -1,6 +1,8 @@
-﻿namespace UnitConverter.Services;
+﻿using UnitConverter.Models;
 
-public class ILogReader
+namespace UnitConverter.Services;
+
+public interface ILogReader
 {
-
+    IEnumerable<LogEntry> Read();
 }

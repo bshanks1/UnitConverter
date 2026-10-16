@@ -11,10 +11,12 @@ public class QuickConversions : PageModel
 {
     public string Output { get; set; }
     private readonly IConversionService conversionService;
+    private readonly ILogger<QuickConversions> logger;
 
-    public QuickConversions(IConversionService conversionService)
+    public QuickConversions(IConversionService conversionService, ILogger<QuickConversions> logger)
     {
         this.conversionService = conversionService;
+        this.logger = logger;
     }
     public void OnGetNormal()
     {
@@ -77,7 +79,7 @@ public class QuickConversions : PageModel
         {
             inputDecimal = Convert.ToDecimal(input);
             Output = conversionService.Convert(inputDecimal, conversionType).ToString();
-
+            logger.LogInformation("Converted {input} using {conversionType} with result {Output}", input,  conversionType, Output);
         }
         catch (Exception e)
         {

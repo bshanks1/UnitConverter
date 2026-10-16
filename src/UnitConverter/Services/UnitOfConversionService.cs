@@ -16,12 +16,6 @@ public class UnitOfConversionService : IConversionService
                 UnitOf.Length unitMK = new UnitOf.Length().FromMiles(output);
                 output = unitMK.ToKilometers();
                 break;
-            /*
-            case ConversionTypes.MilesToKilometersForTest:
-                UnitOf.Length unitMKT = new UnitOf.Length().FromMiles(output);
-                output = unitMKT.ToKilometers();
-                break;
-                */
 
             case ConversionTypes.KilometersToMiles:
                 UnitOf.Length unitKM = new UnitOf.Length().FromKilometers(output);
